@@ -1,0 +1,48 @@
+﻿@model List<WebApplication1.Models.Product>
+@{
+    ViewData["Title"] = "Product List";
+    var sn = 1;
+}
+
+<h2>Product List</h2>
+
+<div class="text-end mb-3">
+    <a asp-action="Create" class="btn btn-primary">Add Product</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
+        <tr>
+            <th>SN</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Created</th>
+            <th style="width: 180px;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@sn</td>
+                <td>@item.product_name</td>
+                <td>@item.product_desc</td>
+                <td>@item.product_price.ToString("F2")</td>
+                <td>@item.createdDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.product_id" class="btn btn-info btn-sm me-1" title="View">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@item.product_id" class="btn btn-warning btn-sm me-1" title="Edit">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.product_id" class="btn btn-danger btn-sm" title="Delete">
+                        <i class="bi bi-x-circle"></i>
+                    </a>
+                </td>
+            </tr>
+            sn++;
+        }
+    </tbody>
+</table>
